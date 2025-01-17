@@ -10,7 +10,7 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '13.48.42.252']
 
 DJANGO_APPS = [
     'django.contrib.admin',
@@ -25,6 +25,8 @@ ADDITOINAL_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'rest_framework_simplejwt.token_blacklist',
+    'django_filters',
+    'drf_yasg',
 ]
 
 OWN_APPS = [

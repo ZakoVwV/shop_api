@@ -80,3 +80,6 @@ class ProductUpdateSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+
+
+
