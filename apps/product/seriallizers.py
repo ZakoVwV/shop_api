@@ -17,7 +17,8 @@ class ProductBaseSerializer(serializers.ModelSerializer):
         return None
 
     def get_average_rating(self, instance):
-        return instance.reviews.aggregate(avg_rating=Avg('rating'))['avg_rating'] or 0.0
+        return instance.avg_rating if instance.avg_rating else 0.0
+
 
 
 class ProductListSerializer(ProductBaseSerializer):
@@ -78,6 +79,7 @@ class ProductUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
+
 
 
 

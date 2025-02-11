@@ -24,7 +24,7 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        products = validated_data['products']
+        products = validated_data.pop('products')
         user = self.context['request'].user
 
         total_sum = sum(product['quantity'] * product['product'].price for product in products)
@@ -41,4 +41,5 @@ class OrderSerializer(serializers.ModelSerializer):
         return order
 
     def get_order_items(self, instance):
-        return OrderItemSerializer(instance.items.all(), many=True).data
+        items = instance.items.select_related('product').all()
+        return OrderItemSerializer(items, many=True).data

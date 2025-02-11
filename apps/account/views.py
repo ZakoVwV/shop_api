@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
 
 from apps.account.tasks import send_activation_email_task, send_reset_password_email_task
-from apps.generals.send_mail import send_activation_email, send_reset_password_email
+
 
 from .serializers import RegisterSerializer, LogOutSerializer, ResetPasswordSerializer, ResetPasswordConfirmSerializer
 from .models import UserResetPasswordToken

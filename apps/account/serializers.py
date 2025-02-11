@@ -19,12 +19,13 @@ class RegisterSerializer(serializers.ModelSerializer):
         password_confirm = attrs.pop('password_confirm')
 
         if password_confirm != password:
-            raise ValueError('password didn\'t match')
+            raise ValueError('пароль не подходит')
         return attrs
 
     def create(self, validated_data):
         user = User.objects.create_user(**validated_data)
         return user
+
 
 
 class LogOutSerializer(serializers.Serializer):

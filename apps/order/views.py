@@ -3,16 +3,21 @@ from rest_framework import permissions
 from rest_framework.response import Response
 
 from apps.order.serializers import OrderSerializer
+from apps.order.models import Order
 
 
 class OrderListCreateView(generics.CreateAPIView):
     serializer_class = OrderSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def get_queryset(self):
+        return Order.objects.filter(user=self.request.user).prefetch_related(
+            'items'
+        )
+
     def get(self, request, *args, **kwargs):
-        user = request.user
-        user_orders = user.orders.all()
-        serializer = self.serializer_class(user_orders, many=True)
+        queryset = self.get_queryset()
+        serializer = self.serializer_class(queryset, many=True)
         return Response(serializer.data, status=201)
 
 
